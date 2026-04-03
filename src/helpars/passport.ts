@@ -21,7 +21,8 @@ passport.use(
                     const data = {
                         uniqueId: profile.id,
                         email: profile.emails?.[0].value || "",
-                        name: profile.displayName,
+                        firstName: profile.name?.givenName || "",
+                        lastName: profile.name?.familyName || "",
                         profileImage: profile.photos?.[0].value || "",
                     }
                     done(null, data);

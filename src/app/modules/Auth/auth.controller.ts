@@ -131,7 +131,6 @@ const loginWithGoogle = catchAsync(async (req: Request, res: Response) => {
   try {
     // const result = await AuthServices.loginWithGoogle(req.body);
     const result = await AuthServices.loginWithGoogle(googleProfile);
-    console.log(result.accessToken);
 
     res.cookie("accessToken", result.accessToken, {
       httpOnly: true,
@@ -153,6 +152,8 @@ const loginWithGoogle = catchAsync(async (req: Request, res: Response) => {
     // Handle different error types (ApiError or other errors)
     if (error instanceof ApiError) {
       // Redirect to the desired URL if login is failed
+      console.log("Error -->:", error.message);
+
       const redirectUrl = `http://localhost:3000/auth/login?message=${error.message}`;
       res.redirect(redirectUrl);
       return sendResponse(res, {

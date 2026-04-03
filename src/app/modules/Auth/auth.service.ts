@@ -383,7 +383,8 @@ const loginUserWithEmail = async (
 };
 
 const loginWithGoogle = async (payload: {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   profileImage: string;
   uniqueId: string;
@@ -397,7 +398,8 @@ const loginWithGoogle = async (payload: {
   if (!userData) {
     const newUser = await prisma.user.create({
       data: {
-        fullName: payload.fullName,
+        firstName: payload.firstName,
+        lastName: payload.lastName,
         email: payload.email,
         profileImage: payload?.profileImage,
         provider: Provider.GOOGLE,
@@ -436,12 +438,12 @@ const loginWithGoogle = async (payload: {
     return { accessToken, refreshToken };
   }
 
-  if (userData.provider !== Provider.GOOGLE) {
-    throw new ApiError(
-      400,
-      `Please login with your ${userData.provider} and Password`,
-    );
-  }
+  //   if (userData.provider !== Provider.GOOGLE) {
+  //     throw new ApiError(
+  //       400,
+  //       `Please login with your ${userData.provider} and Password`,
+  //     );
+  //   }
 
   if (userData.status === UserStatus.INACTIVE) {
     throw new ApiError(403, "Your account is Suspended");
