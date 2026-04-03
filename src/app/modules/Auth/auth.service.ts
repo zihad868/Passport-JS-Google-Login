@@ -484,7 +484,8 @@ const loginWithGoogle = async (payload: {
 };
 
 const loginWithFacebook = async (payload: {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email?: string;
   profileImage: string;
   uniqueId: string;
@@ -496,15 +497,17 @@ const loginWithFacebook = async (payload: {
   });
 
   if (!userData) {
-    const newUser = await prisma.user.create({
-      data: {
-        fullName: payload.fullName,
-        email: payload.email,
-        profileImage: payload?.profileImage,
-        provider: Provider.FACEBOOK,
-        uniqueId: payload.uniqueId,
-      },
-    });
+    const newUser = "" as any;
+    // const newUser = await prisma.user.create({
+    //   data: {
+    //     firstName: payload.firstName,
+    //     lastName: payload.lastName,
+    //     // email: payload.email,
+    //     profileImage: payload?.profileImage,
+    //     provider: Provider.FACEBOOK,
+    //     uniqueId: payload.uniqueId,
+    //   },
+    // });
 
     const accessToken = jwtHelpers.generateToken(
       {

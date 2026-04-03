@@ -4,7 +4,8 @@ import prisma from "../../shared/prisma";
 
 export const initiateSuperAdmin = async () => {
   const payload = {
-    fullName: "Super Admin",
+    firstName: "Super",
+    lastName: "Admin",
     phoneNumber: "1234567890",
     email: "admin@gmail.com",
     password: "12345678",
@@ -24,7 +25,8 @@ export const initiateSuperAdmin = async () => {
 
     const admin = await TransactionClient.user.create({
       data: {
-        fullName: payload.fullName,
+        firstName: payload.firstName,
+        lastName: payload.lastName,
         phoneNumber: payload.phoneNumber,
         email: payload.email,
         password: hashedPassword,
